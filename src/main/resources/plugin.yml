@@ -2,3 +2,7 @@ name: MobHunt
 version: '1.0'
 main: org.ltommi.mobHunt.Main
 api-version: '1.21'
+commands:
+  mobhunt:
+    description: "Main plugin command"
+    usage: /command
