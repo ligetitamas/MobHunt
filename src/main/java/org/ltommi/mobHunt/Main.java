@@ -14,7 +14,6 @@ public final class Main extends JavaPlugin {
         saveDefaultConfig();
 
         mobHuntManager = new MobHuntManager(this);
-
         timeCheckTask  = new TimeCheckTask(this).runTaskLater(this, 20);
 
         this.getCommand("mobhunt").setExecutor(new MobHuntCommand(this));

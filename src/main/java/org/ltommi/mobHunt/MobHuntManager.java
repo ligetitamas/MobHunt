@@ -42,7 +42,13 @@ public class MobHuntManager {
         playerList.remove(player);
         player.sendMessage("You have successfilly left the mobhunt");
     }
+    public void AddPoint(Player player, float point){
+        playerList.put(player, playerList.get(player) + point);
+    }
     public boolean IsHuntStarted(){
         return isHuntStarted;
+    }
+    public boolean ContainsPlayer(Player player){
+        return playerList.containsKey(player);
     }
 }
