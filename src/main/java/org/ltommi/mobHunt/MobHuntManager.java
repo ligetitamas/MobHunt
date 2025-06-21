@@ -6,14 +6,9 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 
 public class MobHuntManager {
-    public enum MobHuntState {
-        START,
-        ENABLED,
-        DISABLED
-    }
     private Main main;
     private HashMap<Player, Float> playerList;
-    private MobHuntState mobHuntState = MobHuntState.DISABLED;
+    private boolean isHuntStarted = false;
 
     public MobHuntManager(Main main){
         this.main = main;
@@ -25,7 +20,7 @@ public class MobHuntManager {
         Bukkit.getLogger().info("MobHunt has been ended");
     }
     public void AddPlayer(Player player){
-        if(mobHuntState!= MobHuntState.DISABLED){
+        if(isHuntStarted){
             if( !playerList.containsKey(player)){
                 playerList.put(player,0f);
                 player.sendMessage("You have successfully joined the mobhunt");
