@@ -6,8 +6,9 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        saveDefaultConfig();
 
+        getLogger().info("MobHunt has been successfully loaded!");
     }
 
     @Override
