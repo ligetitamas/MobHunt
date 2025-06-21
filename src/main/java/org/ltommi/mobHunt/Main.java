@@ -1,6 +1,7 @@
 package org.ltommi.mobHunt;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.ltommi.mobHunt.commands.MobHuntCommand;
 
 public final class Main extends JavaPlugin {
 
@@ -8,12 +9,18 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         saveDefaultConfig();
+
         mobHuntManager = new MobHuntManager(this);
+
+        this.getCommand("mobhunt").setExecutor(new MobHuntCommand(this));
+
         getLogger().info("MobHunt has been successfully loaded!");
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+    }
+    public MobHuntManager GetMobHuntManager(){
+        return mobHuntManager;
     }
 }
