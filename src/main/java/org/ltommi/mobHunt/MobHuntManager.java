@@ -3,7 +3,7 @@ package org.ltommi.mobHunt;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MobHuntManager {
     public enum MobHuntState {
@@ -12,7 +12,7 @@ public class MobHuntManager {
         DISABLED
     }
     private Main main;
-    private ArrayList<Player> playerList = new ArrayList<>();
+    private HashMap<Player, Float> playerList;
     private MobHuntState mobHuntState = MobHuntState.DISABLED;
 
     public MobHuntManager(Main main){
@@ -26,8 +26,8 @@ public class MobHuntManager {
     }
     public void AddPlayer(Player player){
         if(mobHuntState!= MobHuntState.DISABLED){
-            if( !playerList.contains(player)){
-                playerList.add(player);
+            if( !playerList.containsKey(player)){
+                playerList.put(player,0f);
                 player.sendMessage("You have successfully joined the mobhunt");
             }
             else{
