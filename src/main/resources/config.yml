@@ -1,3 +1,10 @@
 #MobHunt Configuration
 
 world: 'world'
+
+mobList:
+  ZOMBIE : 1
+  SKELETON : 2
+  CREEPER : 2
+  ENDERMAN : 3
+  ZOMBIE_VILLAGER : 3
