@@ -14,10 +14,15 @@ public class MobHuntManager {
         this.main = main;
     }
     public void StartMobHunt(){
-        Bukkit.getLogger().info("MobHunt has been started");
+        isHuntStarted = true;
+        Bukkit.broadcastMessage("The MobHunt has started");
+        Bukkit.getLogger().info("MobHunt has started");
     }
     public void EndMobHunt(){
-        Bukkit.getLogger().info("MobHunt has been ended");
+        playerList.clear();
+        isHuntStarted = false;
+        Bukkit.broadcastMessage("The MobHunt has ended");
+        Bukkit.getLogger().info("MobHunt has ended");
     }
     public void AddPlayer(Player player){
         if(isHuntStarted){
@@ -36,5 +41,8 @@ public class MobHuntManager {
     public void RemovePlayer(Player player){
         playerList.remove(player);
         player.sendMessage("You have successfilly left the mobhunt");
+    }
+    public boolean IsHuntStarted(){
+        return isHuntStarted;
     }
 }
