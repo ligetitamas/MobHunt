@@ -27,17 +27,16 @@ public class onEntityDeath implements Listener {
     }
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event){
-        Bukkit.getLogger().info("entity death");
         if(!main.GetMobHuntManager().IsHuntStarted()){
-            Bukkit.getLogger().info("hunt is not started");
             return;
         }
         if(event.getEntity().getWorld() != world){
-            Bukkit.getLogger().info("mob not in world");
             return;
         }
-        Player killer = event.getEntity().getKiller();
-        Bukkit.getLogger().info(killer.getDisplayName());
+        if(event.getEntity().getKiller() == null){
+            return;
+        }
+        String killer = event.getEntity().getKiller().getName();
         if (main.GetMobHuntManager().ContainsPlayer(killer)){
             Bukkit.getLogger().info("contains player");
             if(mobList.containsKey(event.getEntityType())){

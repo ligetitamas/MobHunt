@@ -9,7 +9,7 @@ import java.util.*;
 
 public class MobHuntManager {
     private Main main;
-    private HashMap<Player, Integer> playerList;
+    private HashMap<String, Integer> playerList;
     private boolean isHuntStarted = false;
 
     public MobHuntManager(Main main){
@@ -29,8 +29,8 @@ public class MobHuntManager {
     }
     public void AddPlayer(Player player){
         if(isHuntStarted){
-            if( !playerList.containsKey(player)){
-                playerList.put(player,0);
+            if( !playerList.containsKey(player.getName())){
+                playerList.put(player.getName(),0);
                 player.sendMessage("You have successfully joined the mobhunt");
             }
             else{
@@ -42,15 +42,15 @@ public class MobHuntManager {
         }
     }
     public void RemovePlayer(Player player){
-        playerList.remove(player);
+        playerList.remove(player.getName());
         player.sendMessage("You have successfilly left the mobhunt");
     }
-    public void AddPoint(Player player, int point){
+    public void AddPoint(String player, int point){
         playerList.put(player, playerList.get(player) + point);
     }
     private ArrayList<PlayerPoints> SortPlayers(){
         ArrayList<PlayerPoints> topPlayers = new ArrayList<>();
-        for(Player sortPlayer : playerList.keySet()){
+        for(String sortPlayer : playerList.keySet()){
             topPlayers.add(new PlayerPoints(sortPlayer, playerList.get(sortPlayer)));
         }
         Collections.sort(topPlayers, Comparator.comparing(PlayerPoints::GetPoints));
@@ -64,7 +64,7 @@ public class MobHuntManager {
         if(topPlayers.size()<topCount) topCount = topPlayers.size();
 
         for(int i =0; i< topCount; i++){
-            messages.add(topPlayers.get(i).GetPlayer().getName()+" - "+topPlayers.get(i).GetPoints());
+            messages.add(topPlayers.get(i).GetPlayer()+" - "+topPlayers.get(i).GetPoints());
         }
         for(String line : messages){
             player.sendMessage(line);
@@ -75,7 +75,7 @@ public class MobHuntManager {
     public boolean IsHuntStarted(){
         return isHuntStarted;
     }
-    public boolean ContainsPlayer(Player player){
+    public boolean ContainsPlayer(String player){
         return playerList.containsKey(player);
     }
 }
