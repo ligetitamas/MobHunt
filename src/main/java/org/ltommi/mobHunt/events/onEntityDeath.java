@@ -20,21 +20,28 @@ public class onEntityDeath implements Listener {
         this.main = main;
         this.world = Bukkit.getWorld(main.getConfig().getString("world"));
         ConfigurationSection mobListSection = main.getConfig().getConfigurationSection("mobList");
+        mobList = new HashMap<>();
         for(String mob : mobListSection.getKeys(false)){
             mobList.put(EntityType.valueOf(mob),mobListSection.getInt(mob));
         }
     }
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event){
+        Bukkit.getLogger().info("entity death");
         if(!main.GetMobHuntManager().IsHuntStarted()){
+            Bukkit.getLogger().info("hunt is not started");
             return;
         }
         if(event.getEntity().getWorld() != world){
+            Bukkit.getLogger().info("mob not in world");
             return;
         }
         Player killer = event.getEntity().getKiller();
+        Bukkit.getLogger().info(killer.getDisplayName());
         if (main.GetMobHuntManager().ContainsPlayer(killer)){
+            Bukkit.getLogger().info("contains player");
             if(mobList.containsKey(event.getEntityType())){
+                Bukkit.getLogger().info("contains mob");
                 main.GetMobHuntManager().AddPoint(killer, mobList.get(event.getEntityType()));
             }
         }

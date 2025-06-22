@@ -14,6 +14,7 @@ public class MobHuntManager {
 
     public MobHuntManager(Main main){
         this.main = main;
+        playerList = new HashMap<>();
     }
     public void StartMobHunt(){
         isHuntStarted = true;
@@ -63,7 +64,7 @@ public class MobHuntManager {
         if(topPlayers.size()<topCount) topCount = topPlayers.size();
 
         for(int i =0; i< topCount; i++){
-            messages.add(topPlayers.get(i).GetPlayer()+" - "+topPlayers.get(i).GetPoints());
+            messages.add(topPlayers.get(i).GetPlayer().getName()+" - "+topPlayers.get(i).GetPoints());
         }
         for(String line : messages){
             player.sendMessage(line);

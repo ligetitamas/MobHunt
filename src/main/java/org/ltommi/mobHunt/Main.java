@@ -2,6 +2,7 @@ package org.ltommi.mobHunt;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.ltommi.mobHunt.events.onEntityDeath;
 import org.ltommi.mobHunt.runnableTasks.TimeCheckTask;
 import org.ltommi.mobHunt.commands.MobHuntCommand;
 
@@ -14,9 +15,11 @@ public final class Main extends JavaPlugin {
         saveDefaultConfig();
 
         mobHuntManager = new MobHuntManager(this);
-        timeCheckTask  = new TimeCheckTask(this).runTaskLater(this, 20);
+        timeCheckTask  = new TimeCheckTask(this).runTaskTimer(this,0, 20);
 
         this.getCommand("mobhunt").setExecutor(new MobHuntCommand(this));
+
+        getServer().getPluginManager().registerEvents(new onEntityDeath(this), this);
 
         getLogger().info("MobHunt has been successfully loaded!");
     }

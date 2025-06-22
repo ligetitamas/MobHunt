@@ -27,9 +27,10 @@ public class MobHuntCommand implements CommandExecutor {
             }
             if(args.length == 1 && args[0].equals("top")){
                 main.GetMobHuntManager().SendTopList(player);
+                return true;
             }
         }
-        Bukkit.getLogger().info("Error: You cannot run this command from the consol.");
+        Bukkit.getLogger().info("Error: You cannot run this command from the console.");
         return false;
     }
 }
