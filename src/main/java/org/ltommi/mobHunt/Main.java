@@ -1,18 +1,24 @@
 package org.ltommi.mobHunt;
 
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.ltommi.mobHunt.events.onEntityDeath;
 import org.ltommi.mobHunt.runnableTasks.TimeCheckTask;
 import org.ltommi.mobHunt.commands.MobHuntCommand;
 
+import java.io.File;
+
 public final class Main extends JavaPlugin {
 
     private MobHuntManager mobHuntManager;
     private BukkitTask timeCheckTask;
+    private YamlConfiguration messages;
     @Override
     public void onEnable() {
         saveDefaultConfig();
+        LoadMessages();
 
         mobHuntManager = new MobHuntManager(this);
         timeCheckTask  = new TimeCheckTask(this).runTaskTimer(this,0, 20);
@@ -28,6 +34,16 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
         timeCheckTask.cancel();
         getLogger().info("MobHunt has been disabled.");
+    }
+    private void LoadMessages(){
+        File messagesFile = new File(getDataFolder(), "messages.yml");
+        if (!messagesFile.exists()) {
+            saveResource("messages.yml", false);
+        }
+        messages = YamlConfiguration.loadConfiguration(messagesFile);
+    }
+    public YamlConfiguration GetMessages(){
+        return messages;
     }
     public MobHuntManager GetMobHuntManager(){
         return mobHuntManager;

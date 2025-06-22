@@ -30,7 +30,7 @@ public class MobHuntCommand implements CommandExecutor {
                 return true;
             }
         }
-        Bukkit.getLogger().info("Error: You cannot run this command from the console.");
+        Bukkit.getLogger().info(main.GetMessages().getString("runAsConsoleError"));
         return false;
     }
 }
