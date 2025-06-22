@@ -2,7 +2,7 @@ package org.ltommi.mobHunt;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
-import org.ltommi.mobHunt.RunnableTasks.TimeCheckTask;
+import org.ltommi.mobHunt.runnableTasks.TimeCheckTask;
 import org.ltommi.mobHunt.commands.MobHuntCommand;
 
 public final class Main extends JavaPlugin {

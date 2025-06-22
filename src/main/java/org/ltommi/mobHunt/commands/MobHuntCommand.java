@@ -19,9 +19,14 @@ public class MobHuntCommand implements CommandExecutor {
             Player player = (Player)commandSender;
             if(args.length == 1 && args[0].equals("join")){
                 main.GetMobHuntManager().AddPlayer(player);
+                return true;
             }
             if(args.length == 1 && args[0].equals("leave")){
                 main.GetMobHuntManager().RemovePlayer(player);
+                return true;
+            }
+            if(args.length == 1 && args[0].equals("top")){
+                main.GetMobHuntManager().SendTopList(player);
             }
         }
         Bukkit.getLogger().info("Error: You cannot run this command from the consol.");

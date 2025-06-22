@@ -1,4 +1,4 @@
-package org.ltommi.mobHunt.RunnableTasks;
+package org.ltommi.mobHunt.runnableTasks;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
