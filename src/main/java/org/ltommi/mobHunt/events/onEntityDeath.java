@@ -38,9 +38,7 @@ public class onEntityDeath implements Listener {
         }
         String killer = event.getEntity().getKiller().getName();
         if (main.GetMobHuntManager().ContainsPlayer(killer)){
-            Bukkit.getLogger().info("contains player");
             if(mobList.containsKey(event.getEntityType())){
-                Bukkit.getLogger().info("contains mob");
                 main.GetMobHuntManager().AddPoint(killer, mobList.get(event.getEntityType()));
             }
         }

@@ -1,6 +1,7 @@
 package org.ltommi.mobHunt;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.ltommi.mobHunt.utils.PlayerPoints;
 import org.yaml.snakeyaml.util.ArrayStack;
@@ -22,6 +23,7 @@ public class MobHuntManager {
         Bukkit.getLogger().info("MobHunt has started");
     }
     public void EndMobHunt(){
+        GiveRewards();
         playerList.clear();
         isHuntStarted = false;
         Bukkit.broadcastMessage("The MobHunt has ended");
@@ -74,7 +76,28 @@ public class MobHuntManager {
             player.sendMessage(line);
         }
     }
-
+    private void GiveRewards(){
+        ConfigurationSection rewardSection = main.getConfig().getConfigurationSection("rewards");
+        ArrayList<PlayerPoints> topPlayers = SortPlayers();
+        if(topPlayers.size()>0){
+            List<String> commands = rewardSection.getStringList("first");
+            Reward(topPlayers.get(0).GetPlayer(), commands);
+        }
+        if(topPlayers.size()>1){
+            List<String> commands = rewardSection.getStringList("second");
+            Reward(topPlayers.get(1).GetPlayer(), commands);
+        }
+        if(topPlayers.size()>2){
+            List<String> commands = rewardSection.getStringList("third");
+            Reward(topPlayers.get(2).GetPlayer(), commands);
+        }
+    }
+    private void Reward(String player, List<String> commands) {
+        for (String command : commands) {
+            String filledCommand = command.replace("%player%", player);
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), filledCommand);
+        }
+    }
 
     public boolean IsHuntStarted(){
         return isHuntStarted;

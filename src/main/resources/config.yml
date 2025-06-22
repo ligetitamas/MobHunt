@@ -8,3 +8,11 @@ mobList:
   CREEPER : 2
   ENDERMAN : 3
   ZOMBIE_VILLAGER : 3
+
+rewards:
+  first:
+    - give %player% diamond 1
+  second:
+    - give %player% gold 1
+  third:
+    - give %player% iron 1
