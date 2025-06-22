@@ -57,6 +57,10 @@ public class MobHuntManager {
         return topPlayers;
     }
     public void SendTopList(Player player){
+        if(!isHuntStarted){
+            player.sendMessage("The mobhunt has not started yet");
+            return;
+        }
         ArrayList<PlayerPoints> topPlayers = SortPlayers();
         ArrayList<String> messages = new ArrayList<>();
         messages.add("The top 5 players are:");
