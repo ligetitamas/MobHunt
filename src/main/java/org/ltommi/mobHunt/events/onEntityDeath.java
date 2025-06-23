@@ -3,6 +3,7 @@ package org.ltommi.mobHunt.events;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
@@ -49,6 +50,7 @@ public class onEntityDeath implements Listener {
                 message = message.replace("%pointsGained%", String.valueOf(mobList.get(event.getEntityType())));
                 message = message.replace("%totalPoints%", String.valueOf(main.GetMobHuntManager().GetPlayerPoint(killer.getName())));
                 killer.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacy(message));
+                killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP,1,1);
             }
         }
 
