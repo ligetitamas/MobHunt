@@ -4,48 +4,51 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.ltommi.mobHunt.utils.PlayerPoints;
+import org.ltommi.mobHunt.utils.TextFormatter;
 import org.yaml.snakeyaml.util.ArrayStack;
 
 import java.util.*;
 
 public class MobHuntManager {
     private Main main;
+    private TextFormatter textFormatter;
     private HashMap<String, Integer> playerList;
     private boolean isHuntStarted = false;
 
     public MobHuntManager(Main main){
         this.main = main;
-        playerList = new HashMap<>();
+        this.textFormatter = main.GetTextFormatter();
+        this.playerList = new HashMap<>();
     }
     public void StartMobHunt(){
         isHuntStarted = true;
-        Bukkit.broadcastMessage(main.GetMessages().getString("mobHuntStart"));
+        Bukkit.broadcastMessage(textFormatter.GetMessage("mobHuntStart"));
         Bukkit.getLogger().info("MobHunt has started");
     }
     public void EndMobHunt(){
         GiveRewards();
         playerList.clear();
         isHuntStarted = false;
-        Bukkit.broadcastMessage(main.GetMessages().getString("mobHuntEnd"));
+        Bukkit.broadcastMessage(textFormatter.GetMessage("mobHuntEnd"));
         Bukkit.getLogger().info("MobHunt has ended");
     }
     public void AddPlayer(Player player){
         if(isHuntStarted){
             if( !playerList.containsKey(player.getName())){
                 playerList.put(player.getName(),0);
-                player.sendMessage(main.GetMessages().getString("mobHuntJoin"));
+                player.sendMessage(textFormatter.GetMessage("mobHuntJoin"));
             }
             else{
-                player.sendMessage(main.GetMessages().getString("mobHuntAlreadyJoined"));
+                player.sendMessage(textFormatter.GetMessage("mobHuntAlreadyJoined"));
             }
         }
         else{
-           player.sendMessage(main.GetMessages().getString("mobHuntJoinNotActive"));
+           player.sendMessage(textFormatter.GetMessage("mobHuntJoinNotActive"));
         }
     }
     public void RemovePlayer(Player player){
         playerList.remove(player.getName());
-        player.sendMessage(main.GetMessages().getString("mobHuntLeave"));
+        player.sendMessage(textFormatter.GetMessage("mobHuntLeave"));
     }
     public void AddPoint(String player, int point){
         playerList.put(player, playerList.get(player) + point);
@@ -60,17 +63,17 @@ public class MobHuntManager {
     }
     public void SendTopList(Player player){
         if(!isHuntStarted){
-            player.sendMessage(main.GetMessages().getString("mobJuntTopNotActive"));
+            player.sendMessage(textFormatter.GetMessage("mobJuntTopNotActive"));
             return;
         }
         ArrayList<PlayerPoints> topPlayers = SortPlayers();
         ArrayList<String> messages = new ArrayList<>();
-        messages.add(main.GetMessages().getString("mobHuntTopHeader"));
+        messages.add(textFormatter.GetMessage("mobHuntTopHeader"));
         int topCount = 5;
         if(topPlayers.size()<topCount) topCount = topPlayers.size();
 
         for(int i =0; i< topCount; i++){
-            String message = main.GetMessages().getString("mobHuntTopList");
+            String message = textFormatter.GetMessage("mobHuntTopList");
             message = message.replace("%player%", topPlayers.get(i).GetPlayer());
             message = message.replace("%points%", String.valueOf(topPlayers.get(i).GetPoints()));
             messages.add(message);
@@ -87,7 +90,7 @@ public class MobHuntManager {
             Player player = Bukkit.getPlayer(topPlayers.get(0).GetPlayer());
             List<String> commands = rewardSection.getStringList("first");
             Reward(player.getName(), commands);
-            player.sendMessage(main.GetMessages().getString("mobHuntFirstPlace"));
+            player.sendMessage(textFormatter.GetMessage("mobHuntFirstPlace"));
 
 
         }
@@ -95,13 +98,13 @@ public class MobHuntManager {
             Player player = Bukkit.getPlayer(topPlayers.get(1).GetPlayer());
             List<String> commands = rewardSection.getStringList("second");
             Reward(player.getName(), commands);
-            player.sendMessage(main.GetMessages().getString("mobHuntSecondPlace"));
+            player.sendMessage(textFormatter.GetMessage("mobHuntSecondPlace"));
         }
         if(topPlayers.size()>2){
             Player player = Bukkit.getPlayer(topPlayers.get(2).GetPlayer());
             List<String> commands = rewardSection.getStringList("third");
             Reward(player.getName(), commands);
-            player.sendMessage(main.GetMessages().getString("mobHuntThirdPlace"));
+            player.sendMessage(textFormatter.GetMessage("mobHuntThirdPlace"));
         }
     }
     private void Reward(String player, List<String> commands) {

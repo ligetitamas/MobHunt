@@ -7,12 +7,14 @@ import org.bukkit.scheduler.BukkitTask;
 import org.ltommi.mobHunt.events.onEntityDeath;
 import org.ltommi.mobHunt.runnableTasks.TimeCheckTask;
 import org.ltommi.mobHunt.commands.MobHuntCommand;
+import org.ltommi.mobHunt.utils.TextFormatter;
 
 import java.io.File;
 
 public final class Main extends JavaPlugin {
 
     private MobHuntManager mobHuntManager;
+    private TextFormatter textFormatter;
     private BukkitTask timeCheckTask;
     private YamlConfiguration messages;
     @Override
@@ -21,6 +23,7 @@ public final class Main extends JavaPlugin {
         LoadMessages();
 
         mobHuntManager = new MobHuntManager(this);
+        textFormatter = new TextFormatter(messages);
         timeCheckTask  = new TimeCheckTask(this).runTaskTimer(this,0, 20);
 
         this.getCommand("mobhunt").setExecutor(new MobHuntCommand(this));
@@ -44,6 +47,9 @@ public final class Main extends JavaPlugin {
     }
     public YamlConfiguration GetMessages(){
         return messages;
+    }
+    public TextFormatter GetTextFormatter(){
+        return textFormatter;
     }
     public MobHuntManager GetMobHuntManager(){
         return mobHuntManager;

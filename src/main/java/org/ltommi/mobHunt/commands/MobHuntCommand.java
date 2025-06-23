@@ -30,7 +30,7 @@ public class MobHuntCommand implements CommandExecutor {
                 return true;
             }
         }
-        Bukkit.getLogger().info(main.GetMessages().getString("runAsConsoleError"));
+        Bukkit.getLogger().info(textFormatter.GetMessage("runAsConsoleError"));
         return false;
     }
 }
