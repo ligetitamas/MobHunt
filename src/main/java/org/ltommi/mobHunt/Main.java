@@ -22,8 +22,9 @@ public final class Main extends JavaPlugin {
         saveDefaultConfig();
         LoadMessages();
 
-        mobHuntManager = new MobHuntManager(this);
         textFormatter = new TextFormatter(messages);
+        mobHuntManager = new MobHuntManager(this);
+
         timeCheckTask  = new TimeCheckTask(this).runTaskTimer(this,0, 20);
 
         this.getCommand("mobhunt").setExecutor(new MobHuntCommand(this));

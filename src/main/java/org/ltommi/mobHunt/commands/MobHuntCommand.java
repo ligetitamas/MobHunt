@@ -7,11 +7,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.ltommi.mobHunt.Main;
+import org.ltommi.mobHunt.utils.TextFormatter;
 
 public class MobHuntCommand implements CommandExecutor {
     private Main main;
+    private TextFormatter textFormatter;
     public MobHuntCommand(Main main){
         this.main = main;
+        this.textFormatter = main.GetTextFormatter();
     }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {

@@ -1,5 +1,7 @@
 package org.ltommi.mobHunt.events;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
@@ -9,15 +11,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.ltommi.mobHunt.Main;
+import org.ltommi.mobHunt.utils.TextFormatter;
 
 import java.util.HashMap;
 
 public class onEntityDeath implements Listener {
     private Main main;
+    private TextFormatter textFormatter;
     private World world;
     private HashMap<EntityType, Integer> mobList;
     public onEntityDeath(Main main){
         this.main = main;
+        this.textFormatter = main.GetTextFormatter();
         this.world = Bukkit.getWorld(main.getConfig().getString("world"));
         ConfigurationSection mobListSection = main.getConfig().getConfigurationSection("mobList");
         mobList = new HashMap<>();
@@ -36,10 +41,14 @@ public class onEntityDeath implements Listener {
         if(event.getEntity().getKiller() == null){
             return;
         }
-        String killer = event.getEntity().getKiller().getName();
-        if (main.GetMobHuntManager().ContainsPlayer(killer)){
+        Player killer = event.getEntity().getKiller();
+        if (main.GetMobHuntManager().ContainsPlayer(killer.getName())){
             if(mobList.containsKey(event.getEntityType())){
-                main.GetMobHuntManager().AddPoint(killer, mobList.get(event.getEntityType()));
+                main.GetMobHuntManager().AddPoint(killer.getName(), mobList.get(event.getEntityType()));
+                String message = textFormatter.GetMessage("actionBarPoints");
+                message = message.replace("%pointsGained%", String.valueOf(mobList.get(event.getEntityType())));
+                message = message.replace("%totalPoints%", String.valueOf(main.GetMobHuntManager().GetPlayerPoint(killer.getName())));
+                killer.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacy(message));
             }
         }
 

@@ -53,6 +53,9 @@ public class MobHuntManager {
     public void AddPoint(String player, int point){
         playerList.put(player, playerList.get(player) + point);
     }
+    public int GetPlayerPoint(String player){
+        return playerList.get(player);
+    }
     private ArrayList<PlayerPoints> SortPlayers(){
         ArrayList<PlayerPoints> topPlayers = new ArrayList<>();
         for(String sortPlayer : playerList.keySet()){
@@ -63,7 +66,7 @@ public class MobHuntManager {
     }
     public void SendTopList(Player player){
         if(!isHuntStarted){
-            player.sendMessage(textFormatter.GetMessage("mobJuntTopNotActive"));
+            player.sendMessage(textFormatter.GetMessage("mobHuntTopNotActive"));
             return;
         }
         ArrayList<PlayerPoints> topPlayers = SortPlayers();
