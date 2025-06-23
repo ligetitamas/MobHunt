@@ -4,6 +4,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.ltommi.mobHunt.commands.MHCommandTabCompleter;
 import org.ltommi.mobHunt.events.onEntityDeath;
 import org.ltommi.mobHunt.runnableTasks.TimeCheckTask;
 import org.ltommi.mobHunt.commands.MobHuntCommand;
@@ -28,6 +29,7 @@ public final class Main extends JavaPlugin {
         timeCheckTask  = new TimeCheckTask(this).runTaskTimer(this,0, 20);
 
         this.getCommand("mobhunt").setExecutor(new MobHuntCommand(this));
+        this.getCommand("mobhunt").setTabCompleter(new MHCommandTabCompleter());
 
         getServer().getPluginManager().registerEvents(new onEntityDeath(this), this);
 

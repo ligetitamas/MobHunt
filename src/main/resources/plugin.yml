@@ -6,3 +6,4 @@ commands:
   mobhunt:
     description: "Main plugin command"
     usage: /command
+    aliases: [mh, hunt]
