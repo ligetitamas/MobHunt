@@ -91,23 +91,38 @@ public class MobHuntManager {
         ArrayList<PlayerPoints> topPlayers = SortPlayers();
         if(topPlayers.size()>0){
             Player player = Bukkit.getPlayer(topPlayers.get(0).GetPlayer());
-            List<String> commands = rewardSection.getStringList("first");
-            Reward(player.getName(), commands);
-            player.sendMessage(textFormatter.GetMessage("mobHuntFirstPlace"));
-
-
+            if(playerList.get(player.getName()) >= main.getConfig().getInt("minimumPoints")) {
+                player.sendMessage(textFormatter.GetMessage("mobHuntFirstPlace"));
+                List<String> commands = rewardSection.getStringList("first");
+                Reward(player.getName(), commands);
+            }
+            else{
+                player.sendMessage(textFormatter.GetMessage("mobHuntNotEnoughPoints"));
+            }
         }
         if(topPlayers.size()>1){
             Player player = Bukkit.getPlayer(topPlayers.get(1).GetPlayer());
-            List<String> commands = rewardSection.getStringList("second");
-            Reward(player.getName(), commands);
-            player.sendMessage(textFormatter.GetMessage("mobHuntSecondPlace"));
+            if(playerList.get(player.getName()) >= main.getConfig().getInt("minimumPoints")) {
+                player.sendMessage(textFormatter.GetMessage("mobHuntSecondPlace"));
+                List<String> commands = rewardSection.getStringList("second");
+                Reward(player.getName(), commands);
+            }
+            else{
+                player.sendMessage(textFormatter.GetMessage("mobHuntNotEnoughPoints"));
+            }
+
         }
         if(topPlayers.size()>2){
             Player player = Bukkit.getPlayer(topPlayers.get(2).GetPlayer());
-            List<String> commands = rewardSection.getStringList("third");
-            Reward(player.getName(), commands);
-            player.sendMessage(textFormatter.GetMessage("mobHuntThirdPlace"));
+            if(playerList.get(player.getName()) >= main.getConfig().getInt("minimumPoints")) {
+                player.sendMessage(textFormatter.GetMessage("mobHuntThirdPlace"));
+                List<String> commands = rewardSection.getStringList("third");
+                Reward(player.getName(), commands);
+            }
+            else{
+                player.sendMessage(textFormatter.GetMessage("mobHuntNotEnoughPoints"));
+            }
+
         }
     }
     private void Reward(String player, List<String> commands) {
