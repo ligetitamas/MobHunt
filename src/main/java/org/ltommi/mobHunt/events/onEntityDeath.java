@@ -1,5 +1,6 @@
 package org.ltommi.mobHunt.events;
 
+import de.tr7zw.nbtapi.NBT;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -40,6 +41,11 @@ public class onEntityDeath implements Listener {
             return;
         }
         if(event.getEntity().getKiller() == null){
+            return;
+        }
+        boolean fromSpawner = NBT.getPersistentData(event.getEntity(), nbt -> (boolean) nbt.getBoolean("fromSpawner"));
+        Bukkit.getLogger().info(String.valueOf(fromSpawner));
+        if(fromSpawner){
             return;
         }
         Player killer = event.getEntity().getKiller();

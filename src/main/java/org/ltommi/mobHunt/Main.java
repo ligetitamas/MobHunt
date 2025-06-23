@@ -1,11 +1,12 @@
 package org.ltommi.mobHunt;
 
-import org.bukkit.configuration.file.FileConfiguration;
+import de.tr7zw.nbtapi.NBT;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.ltommi.mobHunt.commands.MHCommandTabCompleter;
 import org.ltommi.mobHunt.events.onEntityDeath;
+import org.ltommi.mobHunt.events.onSpawnerSpawn;
 import org.ltommi.mobHunt.runnableTasks.TimeCheckTask;
 import org.ltommi.mobHunt.commands.MobHuntCommand;
 import org.ltommi.mobHunt.utils.TextFormatter;
@@ -18,11 +19,11 @@ public final class Main extends JavaPlugin {
     private TextFormatter textFormatter;
     private BukkitTask timeCheckTask;
     private YamlConfiguration messages;
+
     @Override
     public void onEnable() {
         saveDefaultConfig();
         LoadMessages();
-
         textFormatter = new TextFormatter(messages);
         mobHuntManager = new MobHuntManager(this);
 
@@ -31,6 +32,7 @@ public final class Main extends JavaPlugin {
         this.getCommand("mobhunt").setExecutor(new MobHuntCommand(this));
         this.getCommand("mobhunt").setTabCompleter(new MHCommandTabCompleter());
 
+        getServer().getPluginManager().registerEvents(new onSpawnerSpawn(), this);
         getServer().getPluginManager().registerEvents(new onEntityDeath(this), this);
 
         getLogger().info("MobHunt has been successfully loaded!");

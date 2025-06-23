@@ -7,3 +7,4 @@ commands:
     description: "Main plugin command"
     usage: /command
     aliases: [mh, hunt]
+depend: [NBTAPI]
