@@ -1,5 +1,7 @@
 runAsConsoleError: "Error: You cannot run this command from the console."
 
+mobHuntConfigReloaded: "The config has been reloaded"
+
 mobHuntStart: "The MobHunt has started"
 mobHuntEnd: "The MobHunt has ended"
 mobHuntJoin: "You have successfully joined the mobhunt"

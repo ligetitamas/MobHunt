@@ -14,10 +14,14 @@ public class MHCommandTabCompleter implements TabCompleter {
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] args) {
         ArrayList<String> commands = new ArrayList<>();
         if(commandSender instanceof Player){
+            Player player = (Player) commandSender;
             if(args.length == 1){
                 commands.add("join");
                 commands.add("leave");
                 commands.add("top");
+                if(player.hasPermission("mobHunt.admin")){
+                    commands.add("reload");
+                }
                 return commands;
             }
         }

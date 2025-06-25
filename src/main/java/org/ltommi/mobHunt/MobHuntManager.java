@@ -131,6 +131,10 @@ public class MobHuntManager {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), filledCommand);
         }
     }
+    public void Reload(Player player){
+        main.reloadConfig();
+        player.sendMessage(textFormatter.GetMessage("mobHuntConfigReloaded"));
+    }
 
     public boolean IsHuntStarted(){
         return isHuntStarted;

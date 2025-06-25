@@ -9,7 +9,10 @@ mobList:
   ENDERMAN : 3
   ZOMBIE_VILLAGER : 3
 
+ignoreSpawners: true
+
 minimumPoints: 0
+
 rewards:
   first:
     - give %player% diamond 1
