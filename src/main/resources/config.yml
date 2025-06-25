@@ -3,15 +3,16 @@
 world: 'world'
 
 mobList:
-  ZOMBIE : 1
-  SKELETON : 2
-  CREEPER : 2
-  ENDERMAN : 3
+  ZOMBIE: 1
+  SPIDER: 1
+  SKELETON: 2
+  CREEPER: 2
+  ENDERMAN: 3
   ZOMBIE_VILLAGER : 3
 
 ignoreSpawners: true
 
-minimumPoints: 0
+minimumPoints: 10
 
 rewards:
   first:
