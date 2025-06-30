@@ -44,7 +44,8 @@ public class onEntityDeath implements Listener {
             return;
         }
         boolean fromSpawner = NBT.getPersistentData(event.getEntity(), nbt -> (boolean) nbt.getBoolean("fromSpawner"));
-        if(!main.getConfig().getBoolean("ignoreSpawners") && fromSpawner){
+        Bukkit.getLogger().info(String.valueOf(fromSpawner));
+        if(main.getConfig().getBoolean("ignoreSpawners") && fromSpawner){
             return;
         }
         Player killer = event.getEntity().getKiller();

@@ -70,6 +70,7 @@ public class MobHuntManager {
             return;
         }
         ArrayList<PlayerPoints> topPlayers = SortPlayers();
+        Collections.reverse(topPlayers);
         ArrayList<String> messages = new ArrayList<>();
         messages.add(textFormatter.GetMessage("mobHuntTopHeader"));
         int topCount = 5;
