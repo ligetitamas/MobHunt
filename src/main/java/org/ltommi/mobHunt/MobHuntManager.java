@@ -62,6 +62,7 @@ public class MobHuntManager {
             topPlayers.add(new PlayerPoints(sortPlayer, playerList.get(sortPlayer)));
         }
         Collections.sort(topPlayers, Comparator.comparing(PlayerPoints::GetPoints));
+        Collections.reverse(topPlayers);
         return topPlayers;
     }
     public void SendTopList(Player player){
@@ -70,7 +71,6 @@ public class MobHuntManager {
             return;
         }
         ArrayList<PlayerPoints> topPlayers = SortPlayers();
-        Collections.reverse(topPlayers);
         ArrayList<String> messages = new ArrayList<>();
         messages.add(textFormatter.GetMessage("mobHuntTopHeader"));
         int topCount = 5;
