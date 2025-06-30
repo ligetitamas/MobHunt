@@ -34,8 +34,10 @@ public class MobHuntCommand implements CommandExecutor {
             }
             if( player.hasPermission("mobhunt.admin") && args.length == 1 && args[0].equals("reload")){
                 main.GetMobHuntManager().Reload(player);
-                return true;
+
             }
+            player.sendMessage(textFormatter.GetMessage("mobHuntHelp"));
+            return true;
         }
         Bukkit.getLogger().info(textFormatter.GetMessage("runAsConsoleError"));
         return false;

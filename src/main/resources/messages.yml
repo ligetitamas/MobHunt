@@ -2,17 +2,27 @@ runAsConsoleError: "&cERROR: You cannot run this command from the console."
 
 mobHuntConfigReloaded: "&aThe config has been reloaded"
 
+mobHuntHelp: "&aThe mobHunt starts every night and you can compete against other players for various rewards. \n
+&a/mh join &7- &fJoin the mobHunt \n
+&a/mh leave &7- &fLeave the mobHunt \n
+&a/mh top &7- &fCheck the current top scoring players."
+
+
 mobHuntStart: "&eThe MobHunt has started! &f(&a/mh join&f)"
 mobHuntEnd: "&eThe MobHunt has ended! A fresh morning is here."
+
 mobHuntJoin: "&aYou have successfully joined the mobhunt"
 mobHuntAlreadyJoined: "&cYou have already joined the mobhunt"
 mobHuntJoinNotActive: "&cYou cannot join the mobhunt while it's not active"
 mobHuntLeave: "&aYou have successfilly left the mobhunt"
+
 mobHuntTopNotActive: "&cThe mobhunt has not started yet"
 mobHuntTopHeader: "&2The top 5 players are:"
 mobHuntTopList: "&e%player% &f- &a%points%"
+
 mobHuntFirstPlace : "&aCongratulations, you won the mob hunt!"
 mobHuntSecondPlace : "&aCongratulations, you have finished second place in the mobhunt!"
 mobHuntThirdPlace : "&aCongratulations, you have finished third place in the mobhunt!"
 mobHuntNotEnoughPoints: "&cYou didn't reach the minimum points required to qualify for rewards"
+
 actionBarPoints: "&a+%pointsGained% &e| &fTotal points: &a%totalPoints%"
