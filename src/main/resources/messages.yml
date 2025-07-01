@@ -2,14 +2,19 @@ runAsConsoleError: "&cERROR: You cannot run this command from the console."
 
 mobHuntConfigReloaded: "&aThe config has been reloaded"
 
-mobHuntHelp: "&aThe mobHunt starts every night and you can compete against other players for various rewards. \n
-&a/mh join &7- &fJoin the mobHunt \n
-&a/mh leave &7- &fLeave the mobHunt \n
-&a/mh top &7- &fCheck the current top scoring players."
-
+mobHuntHelp:
+ "&aThe mobHunt starts every night and you can compete against other players for various rewards. \n
+ &a/mh join &7- &fJoin the mobHunt \n
+ &a/mh leave &7- &fLeave the mobHunt \n
+ &a/mh top &7- &fCheck the current top scoring players."
 
 mobHuntStart: "&eThe MobHunt has started! &f(&a/mh join&f)"
-mobHuntEnd: "&eThe MobHunt has ended! A fresh morning is here."
+mobHuntEnd:
+ "&eThe MobHunt has ended! A fresh morning is here. \n
+ &#d4af37&l1. &#d4af37%firstPlace% - %firstPoints% \n
+ &#c0c0c0&l2. &#c0c0c0%secondPlace% - %secondPoints% \n
+ &#cd7f32&l3. &#cd7f32%thirdPlace% - %thirdPoints% \n
+ "
 
 mobHuntJoin: "&aYou have successfully joined the mobhunt"
 mobHuntAlreadyJoined: "&cYou have already joined the mobhunt"
