@@ -134,6 +134,7 @@ public class MobHuntManager {
     }
     public void Reload(Player player){
         main.reloadConfig();
+        textFormatter.LoadMessages();
         player.sendMessage(textFormatter.GetMessage("mobHuntConfigReloaded"));
     }
 

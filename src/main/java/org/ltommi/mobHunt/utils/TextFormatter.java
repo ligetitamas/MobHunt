@@ -2,14 +2,26 @@ package org.ltommi.mobHunt.utils;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.ltommi.mobHunt.Main;
+import org.yaml.snakeyaml.Yaml;
 
+import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TextFormatter {
+    private Main main;
     private YamlConfiguration messages;
-    public TextFormatter(YamlConfiguration messages){
-        this.messages = messages;
+    public TextFormatter(Main main){
+        this.main = main;
+        LoadMessages();
+    }
+    public void LoadMessages(){
+        File messagesFile = new File(main.getDataFolder(), "messages.yml");
+        if (!messagesFile.exists()) {
+            main.saveResource("messages.yml", false);
+        }
+        messages = YamlConfiguration.loadConfiguration(messagesFile);
     }
     public String Color(String message){
         String coloredMessage=message;
