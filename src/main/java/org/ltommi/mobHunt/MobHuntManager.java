@@ -26,9 +26,9 @@ public class MobHuntManager {
         Bukkit.getLogger().info("MobHunt has started");
     }
     public void EndMobHunt(){
+        isHuntStarted = false;
         GiveRewards();
         playerList.clear();
-        isHuntStarted = false;
         Bukkit.broadcastMessage(textFormatter.GetMessage("mobHuntEnd"));
         Bukkit.getLogger().info("MobHunt has ended");
     }
@@ -92,6 +92,7 @@ public class MobHuntManager {
         ArrayList<PlayerPoints> topPlayers = SortPlayers();
         if(topPlayers.size()>0){
             Player player = Bukkit.getPlayer(topPlayers.get(0).GetPlayer());
+            if(player == null) return;
             if(playerList.get(player.getName()) >= main.getConfig().getInt("minimumPoints")) {
                 player.sendMessage(textFormatter.GetMessage("mobHuntFirstPlace"));
                 List<String> commands = rewardSection.getStringList("first");
@@ -103,6 +104,7 @@ public class MobHuntManager {
         }
         if(topPlayers.size()>1){
             Player player = Bukkit.getPlayer(topPlayers.get(1).GetPlayer());
+            if(player == null) return;
             if(playerList.get(player.getName()) >= main.getConfig().getInt("minimumPoints")) {
                 player.sendMessage(textFormatter.GetMessage("mobHuntSecondPlace"));
                 List<String> commands = rewardSection.getStringList("second");
@@ -115,6 +117,7 @@ public class MobHuntManager {
         }
         if(topPlayers.size()>2){
             Player player = Bukkit.getPlayer(topPlayers.get(2).GetPlayer());
+            if(player == null) return;
             if(playerList.get(player.getName()) >= main.getConfig().getInt("minimumPoints")) {
                 player.sendMessage(textFormatter.GetMessage("mobHuntThirdPlace"));
                 List<String> commands = rewardSection.getStringList("third");
